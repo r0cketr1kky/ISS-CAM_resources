@@ -72,7 +72,7 @@ class ISS_CAM1(BaseCAM):
                 score_list.append(score)
               
               
-              score = max(score_list) - min(score_list)
+              score = sum(score_list) / len(score_list)
               score_saliency_map +=  score * saliency_map
                 
         score_saliency_map = F.relu(score_saliency_map)
@@ -169,7 +169,7 @@ class ISS_CAM2(BaseCAM):
                 score = output[0][predicted_class]
                 score_list.append(score)
                 
-              score = max(score_list) - min(score_list)
+              score = sum(score_list) / len(score_list)
               score_saliency_map +=  score * saliency_map
                 
         score_saliency_map = F.relu(score_saliency_map)
