@@ -55,24 +55,23 @@ class ISS_CAM1(BaseCAM):
               
               x = saliency_map               
 
-              score_list = []
+              #score_list = []
               newmap_list = []
 
               c = 0.1
               
               for i in range(1, 11):
 
-                new_map = x * c * i
+                new_map += x * c * i
 
                 newmap_list.append(new_map)
                
-                output = self.model_arch(new_map * input)
-                output = F.softmax(output)
-                score = output[0][predicted_class]
-                score_list.append(score)
+              output = self.model_arch(new_map * input)
+              output = F.softmax(output)
+              score = output[0][predicted_class]
+              #score_list.append(score)
               
-              
-              score = sum(score_list) / len(score_list)
+              #score = sum(score_list) / len(score_list)
               score_saliency_map +=  score * saliency_map
                 
         score_saliency_map = F.relu(score_saliency_map)
@@ -153,23 +152,23 @@ class ISS_CAM2(BaseCAM):
               #if i % 50 == 0 and i < 300:
               #  visualize(input.cpu(), x.type(torch.FloatTensor).cpu())         
 
-              score_list = []
+              #score_list = []
               newmap_list = []
 
               c = 0.1
               
               for i in range(1, 11):
 
-                new_map = x * c * i
+                new_map += x * c * i
 
                 newmap_list.append(new_map)
                 
-                output = self.model_arch(new_map)
-                output = F.softmax(output)
-                score = output[0][predicted_class]
-                score_list.append(score)
+              output = self.model_arch(new_map)
+              output = F.softmax(output)
+              score = output[0][predicted_class]
+              #score_list.append(score)
                 
-              score = sum(score_list) / len(score_list)
+              #score = sum(score_list) / len(score_list)
               score_saliency_map +=  score * saliency_map
                 
         score_saliency_map = F.relu(score_saliency_map)
